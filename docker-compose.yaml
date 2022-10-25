@@ -1,0 +1,34 @@
+version: '3'
+
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+  postgres-keycloak:
+    image: postgres
+    container_name: postgres-keycloak
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./keycloak-postgres.env
+    ports:
+      - 5445:5432
+    networks:
+      - keycloak-postgres-network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:19.0.1
+    env_file:
+      - ./keycloak-postgres.env
+    entrypoint: /opt/keycloak/bin/kc.sh start-dev
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres-keycloak
+    networks:
+      - keycloak-postgres-network
+
+networks:
+  keycloak-postgres-network:
+    driver: bridge
