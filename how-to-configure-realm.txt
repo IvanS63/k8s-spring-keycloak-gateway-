@@ -1,0 +1,7 @@
+1. Log in to keycloak admin console (admin/admin)
+2. Create new realm (then set realm in application properties)
+3. Create client (add client-id to application properties)
+4. Create admin user in this realm. Add role manage-users
+5. Enable Authentication for client: Authorization enabled = ON, valid redirect urls = http://localhost:8080/*
+
+Realm example can be found in realm-export.json file in root.

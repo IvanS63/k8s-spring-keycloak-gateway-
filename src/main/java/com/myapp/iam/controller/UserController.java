@@ -17,7 +17,7 @@ public class UserController {
     private final KeycloakUserManagementService userManagementService;
 
     @PostMapping
-    private ResponseEntity<Void> createUser(UserCreateRequestDto request) {
+    private ResponseEntity<Void> createUser(@RequestBody UserCreateRequestDto request) {
         userManagementService.createUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

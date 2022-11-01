@@ -7,6 +7,6 @@ iam:
     password: admin
 
 keycloak:
-  resource: myiam-resource
+  resource: my-iam-tester
   realm: IamTesterRealm
-  auth-server-url: http://localhost:8080
+  auth-server-url: http://localhost:8080/
