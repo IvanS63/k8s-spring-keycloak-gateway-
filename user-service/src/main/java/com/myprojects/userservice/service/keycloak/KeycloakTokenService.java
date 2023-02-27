@@ -1,4 +1,4 @@
-package com.myapp.iam.service.keycloak;
+package com.myprojects.userservice.service.keycloak;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

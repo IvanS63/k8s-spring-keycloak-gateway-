@@ -1,7 +1,7 @@
-package com.myapp.iam.service.keycloak;
+package com.myprojects.userservice.service.keycloak;
 
-import com.myapp.iam.dto.UserCreateRequestDto;
-import com.myapp.iam.mapper.KeycloakMapper;
+import com.myprojects.userservice.dto.UserCreateRequestDto;
+import com.myprojects.userservice.mapper.KeycloakMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.resource.RealmResource;

@@ -1,4 +1,4 @@
-package com.myapp.iam.config;
+package com.myprojects.userservice.config;
 
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;

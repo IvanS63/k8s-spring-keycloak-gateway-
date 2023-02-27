@@ -1,4 +1,4 @@
-package com.myapp.iam.dto;
+package com.myprojects.userservice.dto;
 
 import lombok.Data;
 

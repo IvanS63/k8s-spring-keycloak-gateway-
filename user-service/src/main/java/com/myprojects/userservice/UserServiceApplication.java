@@ -1,13 +1,13 @@
-package com.myapp.iam;
+package com.myprojects.userservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringKeycloakAppApplication {
+public class UserServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringKeycloakAppApplication.class, args);
+		SpringApplication.run(UserServiceApplication.class, args);
 	}
 
 }

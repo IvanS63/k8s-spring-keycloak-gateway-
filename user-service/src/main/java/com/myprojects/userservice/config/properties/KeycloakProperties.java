@@ -1,4 +1,4 @@
-package com.myapp.iam.config.properties;
+package com.myprojects.userservice.config.properties;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

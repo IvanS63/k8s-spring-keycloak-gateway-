@@ -1,12 +1,11 @@
-package com.myapp.iam.config;
+package com.myprojects.userservice.config;
 
-import com.myapp.iam.config.properties.KeycloakProperties;
+import com.myprojects.userservice.config.properties.KeycloakProperties;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.admin.client.resource.RealmResource;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

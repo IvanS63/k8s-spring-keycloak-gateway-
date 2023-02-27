@@ -1,8 +1,8 @@
-package com.myapp.iam.controller;
+package com.myprojects.userservice.controller;
 
-import com.myapp.iam.dto.UserCreateRequestDto;
-import com.myapp.iam.service.keycloak.KeycloakPasswordService;
-import com.myapp.iam.service.keycloak.KeycloakUserManagementService;
+import com.myprojects.userservice.dto.UserCreateRequestDto;
+import com.myprojects.userservice.service.keycloak.KeycloakPasswordService;
+import com.myprojects.userservice.service.keycloak.KeycloakUserManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.myapp.iam.mapper;
+package com.myprojects.userservice.mapper;
 
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
