@@ -1,2 +1,17 @@
 server:
-  port: 9090
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/my_db
+    username: admin
+    password: root
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/my_db
+    user: admin
+    password: root
+    baseline-on-migrate: true
+    baseline-version: 0
+    locations: classpath:db/migration

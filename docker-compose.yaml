@@ -1,7 +1,9 @@
 version: '3'
 
 volumes:
-  postgres_data:
+  postgres-data:
+    driver: local
+  postgres-db-data:
     driver: local
 
 services:
@@ -9,7 +11,7 @@ services:
     image: postgres
     container_name: postgres-keycloak
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     env_file:
       - ./keycloak-postgres.env
     ports:
@@ -28,6 +30,18 @@ services:
       - postgres-keycloak
     networks:
       - keycloak-postgres-network
+
+  postgresql-db:
+    image: postgres:14.1
+    container_name: postgresql-db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=my_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-db-data:/var/lib/postgresql/data
 
 networks:
   keycloak-postgres-network:
