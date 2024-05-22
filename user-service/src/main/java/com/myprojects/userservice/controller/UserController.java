@@ -1,30 +1,27 @@
 package com.myprojects.userservice.controller;
 
-import com.myprojects.userservice.dto.UserCreateRequestDto;
-import com.myprojects.userservice.service.keycloak.KeycloakPasswordService;
-import com.myprojects.userservice.service.keycloak.KeycloakUserManagementService;
+import com.myprojects.userservice.api.UsersApi;
+import com.myprojects.userservice.model.UserProfileDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
-public class UserController {
+public class UserController implements UsersApi {
 
-    private final KeycloakPasswordService passwordService;
-    private final KeycloakUserManagementService userManagementService;
-
-    @PostMapping
-    private ResponseEntity<Void> createUser(@RequestBody UserCreateRequestDto request) {
-        userManagementService.createUser(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    @Override
+    public ResponseEntity<Void> deleteUserProfile(String userId) {
+        return UsersApi.super.deleteUserProfile(userId);
     }
 
-    @PatchMapping("/{userId}/password-reset")
-    public ResponseEntity<Void> requestForgetPasswordEmail(@PathVariable("userId") String userId) {
-        passwordService.sendResetPasswordEmail(userId);
-        return ResponseEntity.noContent().build();
+    @Override
+    public ResponseEntity<UserProfileDto> getUserProfile(String userId) {
+        return UsersApi.super.getUserProfile(userId);
+    }
+
+    @Override
+    public ResponseEntity<Void> userSignUp(UserProfileDto userProfileDto) {
+        return UsersApi.super.userSignUp(userProfileDto);
     }
 }

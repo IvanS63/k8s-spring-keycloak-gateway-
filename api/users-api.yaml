@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: User Service API
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+
+tags:
+  - name: users
+
+paths:
+  /users:
+    post:
+      summary: Endpoint for user sign up
+      operationId: user-sign-up
+      tags:
+        - users
+      requestBody:
+        $ref: "#/components/requestBodies/UserSignUpRequest"
+      responses:
+        "201":
+          description: User created
+        "400":
+          description: Invalid input
+        "409":
+          description: Email already in use
+  /users/{userId}:
+    get:
+      summary: Endpoint for getting user profile info
+      tags:
+        - users
+      operationId: get-user-profile
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/UserProfileResponse"
+        "404":
+          description: User not found
+    delete:
+      summary: Delete user profile
+      tags:
+        - users
+      operationId: delete-user-profile
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: User profile has been deleted
+        "404":
+          description: User not found
+
+components:
+  schemas:
+    ApiException:
+      description: Detailed exception message
+      type: object
+      properties:
+        title:
+          type: string
+        detail:
+          type: string
+        inputViolations:
+          nullable: true
+          type: array
+          items:
+            $ref: "#/components/schemas/InputViolation"
+    InputViolation:
+      description: Invalid request parameters detailed information
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+    UserProfile:
+      description: User profile object
+      type: object
+      properties:
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 128
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 128
+        email:
+          type: string
+          minLength: 1
+          maxLength: 128
+          pattern: "^(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$"
+      required:
+        - firstName
+        - lastName
+        - email
+
+  requestBodies:
+    UserSignUpRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserProfile"
+  responses:
+    ApiExceptionResponse:
+      description: General error message containing detailed information
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ApiException"
+    UserProfileResponse:
+      description: User profile response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserProfile"
