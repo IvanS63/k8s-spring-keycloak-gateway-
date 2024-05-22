@@ -1,12 +1,2 @@
 server:
   port: 9090
-
-iam:
-  keycloak:
-    username: admin
-    password: admin
-
-keycloak:
-  resource: my-iam-tester
-  realm: IamTesterRealm
-  auth-server-url: http://localhost:8080/
