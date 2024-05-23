@@ -1,0 +1,7 @@
+user-service:
+  url: http://localhost:9081/
+auth:
+  url: http://localhost:9080/
+  realm: SomeTestRealm
+  client-id: some-client-id
+  client-secret: some-client-secret
