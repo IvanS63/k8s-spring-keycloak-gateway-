@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(UserAlreadyExistsException.class)
-    public ResponseEntity<ApiExceptionDto> userNotFoundExceptionHandler(
-            UserAlreadyExistsException ex) {
+    @ExceptionHandler(GeneralException.class)
+    public ResponseEntity<ApiExceptionDto> generalExceptionHandler(
+            GeneralException ex) {
 
         return new ResponseEntity<>(
                 ApiExceptionDto.builder()
