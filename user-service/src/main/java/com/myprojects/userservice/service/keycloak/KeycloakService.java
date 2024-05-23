@@ -30,7 +30,7 @@ public class KeycloakService {
             if (!status.equals(Response.Status.CREATED)) {
                 throw new RuntimeException();
             }
-            return userRepresentation.getAttributes().get("userId").stream().findFirst().get();
+            return extractUserIdFromKeycloakResponse(response);
         }
     }
 
@@ -42,4 +42,10 @@ public class KeycloakService {
             }
         }
     }
+    private String extractUserIdFromKeycloakResponse(Response createdUserResponse){
+        String header = createdUserResponse.getHeaderString("Location");
+        String[] splitLocationHeader = header.split("/");
+        return splitLocationHeader[splitLocationHeader.length - 1];
+    }
+
 }
