@@ -21,6 +21,7 @@ public class KeycloakEmulator {
     private static final String CLIENT_TOKEN = "some_client_keycloak_token";
     private static final String CLIENT_ID = "user-service-test-client-id";
     private static final String CLIENT_SECRET = "user-service-test-client-secret";
+    private static final String KEYCLOAK_USER_ID = UUID.randomUUID().toString();
 
     public static HttpRequest clientTokenCreationRequest() {
         return request()
@@ -68,6 +69,16 @@ public class KeycloakEmulator {
                 .withHeader("Location",
                         MessageFormat.format("http://somehost:8080/admin/realms/{0}/users/{1}",
                                 realm,
-                                UUID.randomUUID().toString()));
+                                KEYCLOAK_USER_ID));
+    }
+
+    public static HttpRequest setPasswordRequest(String password){
+        return request()
+                .withHeader("Authorization", "Bearer some_client_keycloak_token")
+                .withMethod("PUT")
+                .withPath(MessageFormat.format("/admin/realms/{0}/users/{1}/reset-password", realm, KEYCLOAK_USER_ID))
+                .withBody(json(
+                        format("{\"type\": \"password\",\"value\": \"%s\",\"temporary\":false}", password),
+                        MatchType.ONLY_MATCHING_FIELDS));
     }
 }

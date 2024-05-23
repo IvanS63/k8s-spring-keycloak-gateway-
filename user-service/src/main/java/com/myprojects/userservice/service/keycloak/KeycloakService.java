@@ -7,6 +7,7 @@ import com.myprojects.userservice.mapper.KeycloakMapper;
 import javax.ws.rs.core.Response.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,15 @@ public class KeycloakService {
             }
         }
     }
+
+    public void setUserPassword(String keycloakId, String password){
+        CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+        credentialRepresentation.setType("password");
+        credentialRepresentation.setTemporary(false);
+        credentialRepresentation.setValue(password);
+        keycloakClientProvider.getRealmResource().users().get(keycloakId).resetPassword(credentialRepresentation);
+    }
+
     private String extractUserIdFromKeycloakResponse(Response createdUserResponse){
         String header = createdUserResponse.getHeaderString("Location");
         String[] splitLocationHeader = header.split("/");

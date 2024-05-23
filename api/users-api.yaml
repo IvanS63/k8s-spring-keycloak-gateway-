@@ -96,10 +96,16 @@ components:
           type: string
           minLength: 1
           maxLength: 128
+        password:
+          type: string
+          #          \u005B is unicode for [
+          #          \u005D is unicdoe for ]
+          pattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!\"#$%&''()*+,-./:;<=>?@[\\]^_`{|}~\u005B\u005D])[A-Za-z\d!\"#$%&''()*+,-./:;<=>?@[\\]^_`{|}~\u005B\u005D]{12,128}$
       required:
         - firstName
         - lastName
         - email
+        - password
     UserProfileResponse:
       description: User profile object
       type: object

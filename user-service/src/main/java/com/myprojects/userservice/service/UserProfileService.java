@@ -16,11 +16,12 @@ public class UserProfileService {
     private final UserProfileRepository userProfileRepository;
     private final KeycloakService keycloakService;
 
-    public UserProfileEntity createUser(UserProfileEntity user){
+    public UserProfileEntity createUser(UserProfileEntity user, String password){
         if (userProfileRepository.existsByEmailIgnoreCase(user.getEmail())){
             throw new UserAlreadyExistsException(format("User with email=%s already exists", user.getEmail()));
         }
         String keycloakId = keycloakService.createUser(user.getFirstName() + " " + user.getLastName(), user.getEmail());
+        keycloakService.setUserPassword(keycloakId, password);
         return userProfileRepository.save(user.withKeycloakId(keycloakId));
     }
 }

@@ -3,6 +3,7 @@ package com.myprojects.userservice.controller;
 import static com.myprojects.userservice.emulator.KeycloakEmulator.clientTokenCreationRequest;
 import static com.myprojects.userservice.emulator.KeycloakEmulator.createUserRequest;
 import static com.myprojects.userservice.emulator.KeycloakEmulator.createUserResponse;
+import static com.myprojects.userservice.emulator.KeycloakEmulator.setPasswordRequest;
 import static com.myprojects.userservice.emulator.KeycloakEmulator.tokenCreationResponse;
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
@@ -33,6 +34,7 @@ public class UserSignUpEndpointIT extends BaseIT {
                 .firstName("John")
                 .lastName("Doe")
                 .email("johndoe@email.com")
+                .password("Qwerty_12345")
                 .build();
         keycloakServer
                 .when(clientTokenCreationRequest())
@@ -40,6 +42,9 @@ public class UserSignUpEndpointIT extends BaseIT {
         keycloakServer
                 .when(createUserRequest(request.getFirstName() + " " + request.getLastName(), request.getEmail()))
                 .respond(createUserResponse());
+        keycloakServer
+                .when(setPasswordRequest(request.getPassword()))
+                .respond(HttpResponse.response().withStatusCode(HttpStatus.OK.value()));
         given().
                 contentType(ContentType.JSON).
                 body(request).
@@ -69,6 +74,7 @@ public class UserSignUpEndpointIT extends BaseIT {
                 .firstName("John")
                 .lastName("Doe")
                 .email("johndoe@email.com")
+                .password("Qwerty_12345")
                 .build();
         keycloakServer
                 .when(clientTokenCreationRequest())
@@ -96,6 +102,7 @@ public class UserSignUpEndpointIT extends BaseIT {
                 .firstName("John")
                 .lastName("Doe")
                 .email("johndoe@email.com")
+                .password("Qwerty_12345")
                 .build();
         keycloakServer
                 .when(clientTokenCreationRequest())
@@ -124,6 +131,7 @@ public class UserSignUpEndpointIT extends BaseIT {
                 .firstName(RandomStringUtils.randomAlphabetic(130))
                 .lastName(RandomStringUtils.randomAlphabetic(130))
                 .email(RandomStringUtils.randomAlphabetic(130))
+                .password("1111111")
                 .build();
         given().
                 contentType(ContentType.JSON).
@@ -135,7 +143,7 @@ public class UserSignUpEndpointIT extends BaseIT {
         then().
                 statusCode(HttpStatus.BAD_REQUEST.value()).
                 body("title", equalTo("Field validation errors")).
-                body("inputViolations", hasSize(3));
+                body("inputViolations", hasSize(4));
         assertFalse(userProfileRepository.existsByEmailIgnoreCase(request.getEmail()));
     }
 }

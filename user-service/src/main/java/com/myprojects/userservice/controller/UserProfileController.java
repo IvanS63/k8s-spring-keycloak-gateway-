@@ -20,7 +20,7 @@ public class UserProfileController implements UsersApi {
     @ResponseStatus(HttpStatus.CREATED)
     @Override
     public UserProfileResponseDto userSignUp(UserSignUpRequestDto userSignUpRequestDto) {
-        UserProfileEntity entity = userProfileService.createUser(userProfileMapper.toEntity(userSignUpRequestDto));
+        UserProfileEntity entity = userProfileService.createUser(userProfileMapper.toEntity(userSignUpRequestDto), userSignUpRequestDto.getPassword());
         return userProfileMapper.toDto(entity);
     }
 
