@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/test_db
+    username: testuser
+    password: testuser
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/test_db
+    user: testuser
+    password: testuser
+    baseline-on-migrate: true
+    baseline-version: 0
+    locations: classpath:db/migration
+
+keycloak:
+  realm: SomeTestRealm
+  server-url: http://localhost:9080/
+  client-id: user-service-test-client-id
+  client-secret: user-service-test-client-secret
