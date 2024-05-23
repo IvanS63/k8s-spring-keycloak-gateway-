@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: ${user-service.url}
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
