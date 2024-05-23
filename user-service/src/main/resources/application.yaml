@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
@@ -15,3 +15,9 @@ spring:
     baseline-on-migrate: true
     baseline-version: 0
     locations: classpath:db/migration
+
+keycloak:
+  realm: IamTesterRealm
+  server-url: http://localhost:8080/
+  client-id: user-service-client
+  client-secret: fZPcJAl71m3nUusNaeVfXvQvj767EnSo
