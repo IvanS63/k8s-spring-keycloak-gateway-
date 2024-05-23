@@ -69,10 +69,9 @@ components:
         detail:
           type: string
         inputViolations:
-          nullable: true
           type: array
           items:
-            $ref: "#/components/schemas/InputViolation"
+            $ref: '#/components/schemas/InputViolation'
     InputViolation:
       description: Invalid request parameters detailed information
       type: object
