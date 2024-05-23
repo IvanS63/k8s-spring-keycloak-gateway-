@@ -40,7 +40,7 @@ public class UserSignUpEndpointIT extends BaseIT {
                 .when(clientTokenCreationRequest())
                 .respond(tokenCreationResponse());
         keycloakServer
-                .when(createUserRequest(request.getFirstName() + " " + request.getLastName(), request.getEmail()))
+                .when(createUserRequest(request.getEmail()))
                 .respond(createUserResponse());
         keycloakServer
                 .when(setPasswordRequest(request.getPassword()))
@@ -80,7 +80,7 @@ public class UserSignUpEndpointIT extends BaseIT {
                 .when(clientTokenCreationRequest())
                 .respond(tokenCreationResponse());
         keycloakServer
-                .when(createUserRequest(request.getFirstName() + " " + request.getLastName(), request.getEmail()))
+                .when(createUserRequest(request.getEmail()))
                 .respond(createUserResponse());
         given().
                 contentType(ContentType.JSON).
@@ -108,7 +108,7 @@ public class UserSignUpEndpointIT extends BaseIT {
                 .when(clientTokenCreationRequest())
                 .respond(tokenCreationResponse());
         keycloakServer
-                .when(createUserRequest(request.getFirstName() + " " + request.getLastName(), request.getEmail()))
+                .when(createUserRequest(request.getEmail()))
                 .respond(HttpResponse.response().withStatusCode(409));
         given().
                 contentType(ContentType.JSON).

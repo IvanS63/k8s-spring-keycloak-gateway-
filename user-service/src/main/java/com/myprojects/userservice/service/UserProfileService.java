@@ -20,7 +20,7 @@ public class UserProfileService {
         if (userProfileRepository.existsByEmailIgnoreCase(user.getEmail())){
             throw new UserAlreadyExistsException(format("User with email=%s already exists", user.getEmail()));
         }
-        String keycloakId = keycloakService.createUser(user.getFirstName() + " " + user.getLastName(), user.getEmail());
+        String keycloakId = keycloakService.createUser(user.getEmail());
         keycloakService.setUserPassword(keycloakId, password);
         return userProfileRepository.save(user.withKeycloakId(keycloakId));
     }

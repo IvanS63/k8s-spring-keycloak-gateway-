@@ -21,8 +21,8 @@ public class KeycloakService {
     private final KeycloakClientProvider keycloakClientProvider;
     private final KeycloakMapper mapper;
 
-    public String createUser(String username, String email) {
-        UserRepresentation userRepresentation = mapper.toUserRepresentation(username, email);
+    public String createUser(String email) {
+        UserRepresentation userRepresentation = mapper.toUserRepresentation(email, email);
         try (Response response = keycloakClientProvider.getRealmResource().users().create(userRepresentation)) {
             Response.Status status = response.getStatusInfo().toEnum();
             if (status.equals(Status.CONFLICT)){

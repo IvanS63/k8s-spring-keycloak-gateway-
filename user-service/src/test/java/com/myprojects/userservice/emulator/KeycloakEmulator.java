@@ -52,13 +52,13 @@ public class KeycloakEmulator {
                 );
     }
 
-    public static HttpRequest createUserRequest(String username, String email) {
+    public static HttpRequest createUserRequest(String email) {
         return request()
                 .withHeader("Authorization", "Bearer some_client_keycloak_token")
                 .withMethod("POST")
                 .withPath(MessageFormat.format("/admin/realms/{0}/users", realm))
                 .withBody(json(
-                        format("{\"username\": \"%s\",\"email\": \"%s\"}", username, email),
+                        format("{\"username\": \"%s\",\"email\": \"%s\"}", email, email),
                         MatchType.ONLY_MATCHING_FIELDS));
     }
 
