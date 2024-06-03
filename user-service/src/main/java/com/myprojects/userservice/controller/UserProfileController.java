@@ -25,12 +25,12 @@ public class UserProfileController implements UsersApi {
     }
 
     @Override
-    public void deleteUserProfile(String token, String userId) {
+    public void deleteUserProfile(String userId) {
         userProfileService.deleteUser(userId);
     }
 
     @Override
-    public UserProfileResponseDto getUserProfile(String token, String userId) {
+    public UserProfileResponseDto getUserProfile(String userId) {
         return userProfileMapper.toDto(userProfileService.getUserProfile(userId));
     }
 }

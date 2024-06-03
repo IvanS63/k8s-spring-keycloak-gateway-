@@ -34,6 +34,7 @@ public class GetUserProfileEndpointIT extends BaseIT {
 
         then().
                 statusCode(HttpStatus.OK.value()).
+                body("id", equalTo(entity.getId().toString())).
                 body("firstName", equalTo(entity.getFirstName())).
                 body("lastName", equalTo(entity.getLastName())).
                 body("email", equalTo(entity.getEmail())).

@@ -110,6 +110,8 @@ components:
       description: User profile object
       type: object
       properties:
+        id:
+          type: string
         firstName:
           type: string
         lastName:
