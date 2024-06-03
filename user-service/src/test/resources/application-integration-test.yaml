@@ -12,6 +12,14 @@ spring:
     baseline-on-migrate: true
     baseline-version: 0
     locations: classpath:db/migration
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # configures RSA public key used to verify JWT tokens, matches private key used by JwtTestTokenGenerator
+          #instead of using issuer-uri - read keys from test resources
+          issuer-uri: ""
+          public-key-location: classpath:rsa/rsa_key.pub
 
 keycloak:
   realm: SomeTestRealm

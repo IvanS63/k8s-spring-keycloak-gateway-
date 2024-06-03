@@ -15,5 +15,5 @@ auth:
   url: http://localhost:8080/
   realm: IamTesterRealm
   client-id: api-gateway-client
-  client-secret: BXth2LR859CqM4cZUGzPVVywt8KASttY
+  client-secret: G7hKLES7jcGqMWVhF5T27fGQd2bVfq4N
 

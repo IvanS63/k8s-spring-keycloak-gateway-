@@ -4,7 +4,9 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import com.myprojects.userservice.config.DatabaseContainerInitializer;
 import com.myprojects.userservice.config.MockServerConfiguration;
+import com.myprojects.userservice.config.TestSecurityConfiguration;
 import com.myprojects.userservice.repository.UserProfileRepository;
+import com.myprojects.userservice.util.JwtTestTokenUtil;
 import com.myprojects.userservice.util.MockServer;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 @ActiveProfiles("integration-test")
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ContextConfiguration(initializers = DatabaseContainerInitializer.class,
-        classes = {MockServerConfiguration.class})
+        classes = {MockServerConfiguration.class, TestSecurityConfiguration.class})
 public class BaseIT {
 
     @LocalServerPort
@@ -30,6 +32,8 @@ public class BaseIT {
     protected UserProfileRepository userProfileRepository;
     @Autowired
     private ListableBeanFactory beanFactory;
+    @Autowired
+    protected JwtTestTokenUtil tokenUtil;
 
     @BeforeEach
     void resetMocks() {

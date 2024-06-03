@@ -29,8 +29,6 @@ public class AuthenticationRoutesConfiguration {
     private final JSONParser parser;
 
     /**
-     * Modifies paths, request and response bodies in order to route to the valid VVC portal endpoints.
-     * <p>
      * Routes /auth/tokens to the Keycloak tokens endpoint. It returns 401 if the password isn't set
      * or Keycloak user is disabled. Otherwise, it generates Keycloak token.
      *

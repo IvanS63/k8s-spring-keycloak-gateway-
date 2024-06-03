@@ -15,9 +15,20 @@ spring:
     baseline-on-migrate: true
     baseline-version: 0
     locations: classpath:db/migration
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/IamTesterRealm
+
+logging:
+  level:
+    org:
+      springframework:
+        security: INFO
 
 keycloak:
   realm: IamTesterRealm
   server-url: http://localhost:8080/
   client-id: user-service-client
-  client-secret: fZPcJAl71m3nUusNaeVfXvQvj767EnSo
+  client-secret: aFLfjJaOwsIHZuKERK4A3ij3ogPBHu0K

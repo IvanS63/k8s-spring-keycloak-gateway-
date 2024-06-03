@@ -27,7 +27,7 @@ public class GetUserProfileEndpointIT extends BaseIT {
                         .email("johndoe@email.com").build());
         given().
                 contentType(ContentType.JSON).
-                header("Authorization", "Bearer someToken").
+                auth().oauth2(tokenUtil.generateUserToken(entity.getKeycloakId())).
 
         when().
                 get("/users/" + entity.getId()).
@@ -45,7 +45,7 @@ public class GetUserProfileEndpointIT extends BaseIT {
         String userId = UUID.randomUUID().toString();
         given().
                 contentType(ContentType.JSON).
-                header("Authorization", "Bearer someToken").
+                auth().oauth2(tokenUtil.generateUserToken(userId)).
 
         when().
                 get("/users/" + userId).
@@ -53,5 +53,18 @@ public class GetUserProfileEndpointIT extends BaseIT {
         then().
                 statusCode(HttpStatus.NOT_FOUND.value()).
                 body("title", equalTo(format("User profile with id=%s not found", userId)));
+    }
+
+    @Test
+    public void shouldReturn401IfAccessTokenWasNotProvidedInTheRequest() {
+        String userId = UUID.randomUUID().toString();
+        given().
+                contentType(ContentType.JSON).
+
+        when().
+                get("/users/" + userId).
+
+        then().
+                statusCode(HttpStatus.UNAUTHORIZED.value());
     }
 }
